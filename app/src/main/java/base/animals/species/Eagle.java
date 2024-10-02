@@ -8,9 +8,4 @@ public class Eagle extends Animal implements Flying {
   public void eat(Meat food) {
     super.eat(food);
   }
-
-  @Override
-  public void fly() {
-    System.out.println("Eagle is flying...");
-  }
 }

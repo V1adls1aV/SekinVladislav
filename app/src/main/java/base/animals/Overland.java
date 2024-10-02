@@ -1,5 +1,7 @@
 package base.animals;
 
 public interface Overland {
-  void walk();
+  public default void walk() {
+    System.out.println(this.getClass().getSimpleName() + " is walking.");
+  }
 }

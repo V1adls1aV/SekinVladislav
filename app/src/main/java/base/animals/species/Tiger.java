@@ -8,9 +8,4 @@ public class Tiger extends Animal implements Overland {
   public void eat(Beef food) {
     super.eat(food);
   }
-
-  @Override
-  public void walk() {
-    System.out.println("Tiger is walking...");
-  }
 }

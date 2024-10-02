@@ -1,5 +1,7 @@
 package base.animals;
 
 public interface Waterfowl {
-  void swim();
+  public default void swim() {
+    System.out.println(this.getClass().getSimpleName() + " is swimming.");
+  }
 }

@@ -1,5 +1,7 @@
 package base.animals;
 
 public interface Flying {
-  void fly();
+  public default void fly() {
+    System.out.println(this.getClass().getSimpleName() + " is flying.");
+  }
 }

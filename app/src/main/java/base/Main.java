@@ -5,10 +5,10 @@ import base.animals.species.Dolphin;
 import base.animals.species.Eagle;
 import base.animals.species.Horse;
 import base.animals.species.Tiger;
-import base.foods.fish.Fish;
-import base.foods.grass.Grass;
+import base.foods.marine.Fish;
 import base.foods.meat.Beef;
 import base.foods.meat.Meat;
+import base.foods.vegetative.Grass;
 
 public class Main {
   public static void main(String[] args) {
