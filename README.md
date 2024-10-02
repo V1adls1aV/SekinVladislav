@@ -10,12 +10,12 @@
 
 --- 
 
-- Main.java
+- Main
 - animals
-  - Animal.java (Abstract class)
-  - Overland.java (Interface)
-  - Flying.java (Interface)
-  - Waterfowl.java (Interface)
+  - Animal (Abstract class)
+  - Overland (Interface)
+  - Flying (Interface)
+  - Waterfowl (Interface)
 
   - species
     - Camel
@@ -25,11 +25,13 @@
     - Tiger
 
 - foods
-  - Food.java (Abstract class)
+  - Food (Abstract class)
   - meat
     - Meat
     - Beef
-  - fish
+  - marine
+    - Marine
     - Fish
-  - grass
+  - vegetative
+    - Vegetative
     - Grass
