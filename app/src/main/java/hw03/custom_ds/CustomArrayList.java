@@ -26,10 +26,8 @@ public class CustomArrayList<T> implements CustomContainer<T> {
    * @param capacity a reserved size for the array
    */
   public CustomArrayList(int capacity) throws IllegalArgumentException {
-    if (capacity < 0) {
-      throw new IllegalArgumentException("Capacity must be non-negative");
-    } else if (capacity == 0) {
-      capacity = 1;
+    if (capacity <= 0) {
+      throw new IllegalArgumentException("Capacity must be positive.");
     }
 
     this.array = (T[]) new Object[capacity];
@@ -53,11 +51,11 @@ public class CustomArrayList<T> implements CustomContainer<T> {
    * element.
    *
    * @param obj the element to be added to this custom array list
-   * @throws NullPointerException if the specified element is null
+   * @throws IllegalArgumentException if the specified element is null
    */
-  public void add(T obj) throws NullPointerException {
+  public void add(T obj) throws IllegalArgumentException {
     if (obj == null) {
-      throw new NullPointerException("Null element is not allowed");
+      throw new IllegalArgumentException("Null element is not allowed");
     }
 
     if (this.size == this.capacity) {
