@@ -7,8 +7,14 @@ public class Main {
     CustomArrayList<Integer> list = new CustomArrayList<Integer>(2);
     System.out.println(list.isEmpty());
 
+    try {
+      list.get(0);
+    } catch (IndexOutOfBoundsException e) {
+      System.out.println("There is no element with the specified index.");
+    }
+
     for (int i = 0; i != 10; i++) {
-      list.add(i + 1);
+      list.add(i);
     }
     System.out.println(list.isEmpty());
 

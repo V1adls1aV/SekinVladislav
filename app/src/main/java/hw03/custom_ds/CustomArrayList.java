@@ -35,12 +35,47 @@ public class CustomArrayList<T> implements CustomContainer<T> {
     this.size = 0;
   }
 
+  /**
+   * Corrects the index for reversed indexing.
+   *
+   * <p>This method takes an index as input and returns the corresponding index in the internal
+   * array. If the provided index is out of bounds, an {@link IndexOutOfBoundsException} is thrown.
+   *
+   * @param index the index to be corrected
+   * @return the corrected index in the internal array
+   * @throws IndexOutOfBoundsException if index out of bounds, you may specify reversed indexing
+   */
   protected int correctIndex(int index) throws IndexOutOfBoundsException {
     if (index < -size || size <= index) {
       throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + this.size);
     }
 
     return (index + this.size) % this.size;
+  }
+
+  protected void changeCapacity(int newCapacity) {
+    T[] temp = (T[]) new Object[newCapacity];
+    System.arraycopy(this.array, 0, temp, 0, this.size);
+    this.array = temp;
+    this.capacity = newCapacity;
+  }
+
+  /**
+   * Performs a left shift operation on the elements of the internal array starting from the
+   * specified index. This method is used to remove an element from the custom array list by
+   * shifting all subsequent elements to the left.
+   *
+   * @param from the index from which the left shift operation should start. The element at this
+   *     index will be overwritten by the next element, and so on
+   * @throws IndexOutOfBoundsException if index out of bounds, you may specify reversed indexing
+   */
+  protected void leftShiftElements(int from) throws IndexOutOfBoundsException {
+    from = correctIndex(from);
+
+    this.size--;
+    for (int i = from; i < this.size; i++) {
+      this.array[i] = this.array[i + 1];
+    }
   }
 
   /**
@@ -59,10 +94,7 @@ public class CustomArrayList<T> implements CustomContainer<T> {
     }
 
     if (this.size == this.capacity) {
-      this.capacity *= 2;
-      T[] temp = (T[]) new Object[this.capacity];
-      System.arraycopy(this.array, 0, temp, 0, this.size);
-      this.array = temp;
+      changeCapacity(this.capacity * 2);
     }
 
     this.array[this.size] = obj;
@@ -90,27 +122,32 @@ public class CustomArrayList<T> implements CustomContainer<T> {
    */
   public T remove(int idx) throws IndexOutOfBoundsException {
     idx = this.correctIndex(idx);
-    T value = array[idx];
-    size--;
 
-    for (int i = idx; i < size; i++) {
-      array[i] = array[i + 1];
-    }
+    T value = this.array[idx];
 
-    if (size <= capacity / 2) {
-      capacity /= 2;
-      T[] temp = (T[]) new Object[capacity];
-      System.arraycopy(array, 0, temp, 0, size);
-      array = temp;
+    leftShiftElements(idx);
+
+    if (this.size <= this.capacity / 2) {
+      changeCapacity(this.capacity / 2);
     }
 
     return value;
   }
 
+  /**
+   * Size of the custom array list.
+   *
+   * @return the number of elements in this custom array list
+   */
   public int size() {
     return this.size;
   }
 
+  /**
+   * Checks if the custom array list is empty.
+   *
+   * @return {@code true} if the custom array list contains no elements; {@code false} otherwise.
+   */
   public boolean isEmpty() {
     return this.size == 0;
   }
