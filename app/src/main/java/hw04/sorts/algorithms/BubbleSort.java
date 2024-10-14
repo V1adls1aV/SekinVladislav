@@ -5,10 +5,17 @@ import java.util.List;
 
 /** Bubble sort algorithm implementation. You may specify max list size to be sorted. */
 public class BubbleSort extends SortAlgorithm {
+  public final SortType sortType = SortType.BUBBLE;
+
   public BubbleSort() {}
 
   public BubbleSort(int maxListSize) {
     this.MAX_LIST_SIZE = maxListSize;
+  }
+
+  @Override
+  public SortType getSortType() {
+    return SortType.BUBBLE;
   }
 
   @Override

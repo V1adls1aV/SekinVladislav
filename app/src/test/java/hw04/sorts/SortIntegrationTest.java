@@ -24,14 +24,28 @@ public class SortIntegrationTest {
   }
 
   @Test
-  public void testSortingWithBrokenAlgorithm1() {
+  public void testSortingTypeWithBroken1() {
+    Sorter sorter = new Sorter(List.of(new BubbleSort(), new MergeSort(5), new BubbleSort(5)));
+    List<Integer> result = sorter.sort(list, SortType.BUBBLE);
+    assertTrue(result.equals(correct));
+  }
+
+  @Test
+  public void testSortingTypeWithBroken2() {
+    Sorter sorter = new Sorter(List.of(new BubbleSort(5), new MergeSort(), new BubbleSort()));
+    List<Integer> result = sorter.sort(list, SortType.MERGE);
+    assertTrue(result.equals(correct));
+  }
+
+  @Test
+  public void testSortingWithBroken1() {
     Sorter sorter = new Sorter(List.of(new BubbleSort(overflowListSize), new MergeSort()));
     List<Integer> result = sorter.sort(list);
     assertTrue(result.equals(correct));
   }
 
   @Test
-  public void testSortingWithBrokenAlgorithm2() {
+  public void testSortingWithBroken2() {
     Sorter sorter = new Sorter(List.of(new BubbleSort(), new MergeSort(overflowListSize)));
     List<Integer> result = sorter.sort(list);
     assertTrue(result.equals(correct));
@@ -44,6 +58,17 @@ public class SortIntegrationTest {
     assertThrowsExactly(ListSizeException.class, () -> sorter.sort(list));
   }
 
+  @Test
+  public void testFailingSortingType() {
+    Sorter sorter =
+        new Sorter(
+            List.of(
+                new MergeSort(overflowListSize),
+                new BubbleSort(overflowListSize),
+                new BubbleSort(overflowListSize)));
+    assertThrowsExactly(ListSizeException.class, () -> sorter.sort(list, SortType.BUBBLE));
+  }
+
   public void stressTestSorting() {
     List<Integer> list = new ArrayList<Integer>();
     Random random = new Random();
@@ -51,8 +76,10 @@ public class SortIntegrationTest {
       list.add(random.nextInt(1000));
     }
 
-    Sorter sorter = new Sorter(List.of(new BubbleSort(), new MergeSort()));
-    List<Integer> result = sorter.sort(list);
+    Sorter sorter =
+        new Sorter(
+            List.of(new BubbleSort(50), new MergeSort(70), new MergeSort(100), new BubbleSort()));
+    List<Integer> result = sorter.sort(list, SortType.MERGE);
 
     for (int i = 0; i < result.size() - 1; i++) {
       assertTrue(result.get(i) <= result.get(i + 1));

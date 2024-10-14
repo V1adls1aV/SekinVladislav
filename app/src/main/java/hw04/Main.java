@@ -3,6 +3,7 @@ package hw04;
 import hw04.sorts.Sorter;
 import hw04.sorts.algorithms.BubbleSort;
 import hw04.sorts.algorithms.MergeSort;
+import hw04.sorts.algorithms.SortType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,8 +21,7 @@ public class Main {
     for (int i = 0; i < 16; i++) {
       list.add(random.nextInt(100));
     }
-
-    Sorter sorter = new Sorter(Arrays.asList(new BubbleSort(10), new MergeSort()));
-    return sorter.sort(list);
+    Sorter sorter = new Sorter(Arrays.asList(new BubbleSort(5), new MergeSort(5), new MergeSort()));
+    return sorter.sort(list, SortType.MERGE);
   }
 }

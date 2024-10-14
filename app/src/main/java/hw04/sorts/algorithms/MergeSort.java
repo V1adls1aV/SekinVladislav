@@ -13,6 +13,11 @@ public class MergeSort extends SortAlgorithm {
   }
 
   @Override
+  public SortType getSortType() {
+    return SortType.MERGE;
+  }
+
+  @Override
   public ArrayList<Integer> sort(List<Integer> list) {
     this.checkListSize(list.size());
 

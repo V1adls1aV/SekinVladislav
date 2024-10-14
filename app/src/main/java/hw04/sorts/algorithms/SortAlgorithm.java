@@ -8,6 +8,10 @@ import java.util.List;
 public abstract class SortAlgorithm {
   protected Integer MAX_LIST_SIZE = null;
 
+  public SortType getSortType() {
+    return null;
+  }
+
   /**
    * Throws an exception if size of the list is not suitable for this algorithm.
    *
