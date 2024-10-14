@@ -3,6 +3,7 @@ package hw04.sorts.algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Bubble sort algorithm implementation. You may specify max list size to be sorted. */
 public class BubbleSort extends SortAlgorithm {
   public BubbleSort() {}
 

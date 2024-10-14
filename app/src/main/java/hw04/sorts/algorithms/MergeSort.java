@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/** Merge sort algorithm implementation. You may specify max list size to be sorted. */
 public class MergeSort extends SortAlgorithm {
   public MergeSort() {}
 
