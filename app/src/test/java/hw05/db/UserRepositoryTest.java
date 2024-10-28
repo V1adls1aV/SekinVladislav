@@ -1,40 +1,38 @@
 package hw05.db;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 import hw05.db.entities.User;
-import hw05.db.exceptions.UniqueValueException;
-import hw05.db.repository.UserRepository;
+import hw05.db.repositories.user.UserRepository;
+import hw05.db.repositories.user.UserRepositoryHashMap;
 import org.junit.jupiter.api.Test;
 
 public class UserRepositoryTest {
+  private static final User firstUser = new User("Vlad", "Sekin", "9336339");
+  private static final User firstUserUpdated = new User("Vladislav", "Sekin", "9336339");
+  private static final User secondUser = new User("Gleb", "Karpov", "8225228");
+
   @Test
-  public void testCRUD() {
-    UserRepository userRepository = new UserRepository();
+  public void testInsert() {
+    UserRepository userRepository = new UserRepositoryHashMap();
 
-    User firstUser = new User("Vladislav", "Sekin", "9336339");
-    userRepository.addUser(firstUser);
+    userRepository.updateByMsisdn(firstUser);
+    userRepository.updateByMsisdn(secondUser);
 
-    User secondUser = new User("Gleb", "Karpov", "8225228");
-    userRepository.addUser(secondUser);
-
-    User user = userRepository.getUserByPhoneNumber("9336339");
+    User user = userRepository.findByMsisdn(firstUser.getMsisdn());
     assertEquals(firstUser, user);
 
-    user = userRepository.getUserByPhoneNumber("8225228");
+    user = userRepository.findByMsisdn(secondUser.getMsisdn());
     assertEquals(secondUser, user);
   }
 
   @Test
-  public void testUniqueConstraint() {
-    hw05.db.repository.UserRepository userRepository = new UserRepository();
+  public void testUpdate() {
+    UserRepository userRepository = new UserRepositoryHashMap();
 
-    User firstUser = new User("Vladislav", "Sekin", "9336339");
-    userRepository.addUser(firstUser);
+    userRepository.updateByMsisdn(firstUser);
+    userRepository.updateByMsisdn(firstUserUpdated);
 
-    assertThrowsExactly(
-        UniqueValueException.class,
-        () -> userRepository.addUser(new User("Gleb", "Karpov", "9336339")));
+    assertEquals(firstUserUpdated, userRepository.findByMsisdn(firstUser.getMsisdn()));
   }
 }

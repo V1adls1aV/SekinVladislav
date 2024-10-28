@@ -8,23 +8,23 @@ package hw05.db.entities;
 public class User {
   private String firstName;
   private String lastName;
-  private String phoneNumber;
+  private String msisdn;
 
   /**
    * Constructor for User.
    *
    * @param firstName
    * @param lastName
-   * @param phoneNumber
+   * @param msisdn
    * @throws IllegalArgumentException if any of the fields are null.
    */
-  public User(String firstName, String lastName, String phoneNumber) {
-    if (firstName == null || lastName == null || phoneNumber == null) {
+  public User(String firstName, String lastName, String msisdn) {
+    if (firstName == null || lastName == null || msisdn == null) {
       throw new IllegalArgumentException("User fields cannot be null.");
     }
     this.firstName = firstName;
     this.lastName = lastName;
-    this.phoneNumber = phoneNumber;
+    this.msisdn = msisdn;
   }
 
   public String getFirstName() {
@@ -35,8 +35,8 @@ public class User {
     return lastName;
   }
 
-  public String getPhoneNumber() {
-    return phoneNumber;
+  public String getMsisdn() {
+    return msisdn;
   }
 
   /**
@@ -50,22 +50,22 @@ public class User {
       return false;
     }
     User user = (User) o;
-    return user.firstName.equals(firstName)
-        && user.lastName.equals(lastName)
-        && user.phoneNumber.equals(phoneNumber);
+    return user.firstName.equals(this.firstName)
+        && user.lastName.equals(this.lastName)
+        && user.msisdn.equals(this.msisdn);
   }
 
   @Override
   public String toString() {
     return "User("
         + "firstName='"
-        + firstName
+        + this.firstName
         + '\''
         + ", lastName='"
-        + lastName
+        + this.lastName
         + '\''
         + ", phoneNumber='"
-        + phoneNumber
+        + this.msisdn
         + '\''
         + ')';
   }
