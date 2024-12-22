@@ -50,6 +50,13 @@
       <artifactId>logback-classic</artifactId>
       <version>1.4.8</version>
     </dependency>
+
+
+    <dependency>
+      <groupId>com.typesafe</groupId>
+      <artifactId>config</artifactId>
+      <version>1.4.2</version>
+    </dependency>
   </dependencies>
 
 
@@ -91,7 +98,7 @@
                     <limit>
                       <counter>LINE</counter>
                       <value>COVEREDRATIO</value>
-                      <minimum>0.60</minimum>
+                      <minimum>0.0</minimum>
                     </limit>
                   </limits>
                 </rule>

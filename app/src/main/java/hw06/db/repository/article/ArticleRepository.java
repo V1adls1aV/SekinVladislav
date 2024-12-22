@@ -1,5 +1,7 @@
 package hw06.db.repository.article;
 
+import hw06.core.exceptions.db.ArticleRowNotFoundException;
+import hw06.core.exceptions.db.CommentRowNotFoundException;
 import hw06.dto.article.Article;
 import hw06.dto.article.ArticleData;
 import hw06.dto.article.ArticleId;
@@ -7,6 +9,7 @@ import hw06.dto.comment.Comment;
 import hw06.dto.comment.CommentData;
 import hw06.dto.comment.CommentId;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -31,13 +34,20 @@ public interface ArticleRepository {
   Optional<Article> getById(ArticleId id);
 
   /**
+   * Returns all articles from the repository
+   *
+   * @return the list of all articles
+  */
+  List<Article> getAll();
+
+  /**
    * Overrides fields of article with specified id.
    * Does not update the comments. Use separate methods for such.
    *
    * @param articleId the id of the article
    * @param articleData – the data to update
    */
-  void update(ArticleId articleId, ArticleData articleData);
+  void update(ArticleId articleId, ArticleData articleData) throws ArticleRowNotFoundException;
 
   /**
    * Deletes article with the given id if such exists.
@@ -54,7 +64,7 @@ public interface ArticleRepository {
    * @param commentData the comment data from which create a new comment and add it
    * @return new created comment
    */
-  Comment addComment(ArticleId articleId, CommentData commentData);
+  Comment addComment(ArticleId articleId, CommentData commentData) throws ArticleRowNotFoundException;
 
   /**
    * Updates a comment in the article with given data.
@@ -63,7 +73,7 @@ public interface ArticleRepository {
    * @param commentId the id of the comment to be updated
    * @param commentData the data to update in the comment
    */
-  void updateComment(ArticleId articleId, CommentId commentId, CommentData commentData);
+  void updateComment(ArticleId articleId, CommentId commentId, CommentData commentData) throws ArticleRowNotFoundException, CommentRowNotFoundException;
 
   /**
    * Removes a comment from the article with the given id.
@@ -72,5 +82,5 @@ public interface ArticleRepository {
    * @param articleId the id of the article from which the comment will be removed
    * @param commentId the id of the comment to be removed
    */
-  void removeComment(ArticleId articleId, CommentId commentId);
+  void deleteComment(ArticleId articleId, CommentId commentId);
 }

@@ -13,6 +13,4 @@
     <appender-ref ref="CONSOLE"/>
   </root>
 
-  <!-- <logger name="hw06.SomeClass" level="DEBUG"/> -->
-
 </configuration>
